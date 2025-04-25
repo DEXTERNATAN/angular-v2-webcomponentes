@@ -1,0 +1,139 @@
+<div class="loading-container" role="main">
+  <h1>Demonstração do Componente &lt;br-loading&gt;</h1>
+  <p>
+    Esta página demonstra diferentes usos do componente
+    <code>&lt;br-loading&gt;</code>, utilizado para indicar visualmente o
+    carregamento de dados ou o progresso de processos no sistema.
+  </p>
+
+  <br-message state="danger" show-icon class="mb-4">
+    <ul class="mb-0">
+      <li>
+        O <code>[(ngModel)]</code> precisa do atributo <code>name</code> no
+        componente <code>&lt;br-loading&gt;</code>.
+      </li>
+      <li>
+        A barra de progresso não atualiza dinamicamente e a animação fica
+        inconsistente.
+      </li>
+      <li>
+        Utilize <code>ngDefaultControl</code> para ativar o binding
+        bidirecional.
+      </li>
+    </ul>
+  </br-message>
+
+  <div class="br-card screen-preview mb-4">
+    <div class="screen-header">
+      <div class="screen-title">Loading Padrão com Texto</div>
+    </div>
+    <div class="card-content">
+      <p class="mb-3">Exemplo básico de um loading com texto descritivo.</p>
+      <div class="d-flex flex-wrap justify-content-evenly p-3">
+        <br-loading label="Carregando dados..." is-medium />
+      </div>
+    </div>
+  </div>
+
+  <div class="br-card screen-preview mb-4">
+    <div class="screen-header">
+      <div class="screen-title">Loading com Barra de Progresso (Estático)</div>
+    </div>
+    <div class="card-content">
+      <p class="mb-3">
+        Exemplo de loading com barra de progresso, exibindo 100%.
+      </p>
+      <div class="d-flex flex-wrap justify-content-evenly p-3">
+        <br-loading is-progress progress-percent="100" />
+      </div>
+    </div>
+  </div>
+
+  <div class="br-card screen-preview mb-4">
+    <div class="screen-header">
+      <div class="screen-title">Loading com Barra de Progresso (Dinâmico)</div>
+    </div>
+    <div class="card-content">
+      <p class="mb-3">
+        Exemplo de loading cuja barra de progresso é controlada dinamicamente.
+      </p>
+      <div class="d-flex flex-column align-items-center gap-3 mt-3 p-4">
+        <br-loading
+          is-progress
+          [progress-percent]="progress"
+          [label]="progress < MAX_PROGRESS ? 'Processando...' : 'Concluído!'"
+        />
+        <div class="d-flex gap-2 mt-2">
+          <br-button
+            type="button"
+            [disabled]="progress >= MAX_PROGRESS"
+            (click)="aumentarProgresso()"
+            density="small"
+          >
+            {{
+                progress < MAX_PROGRESS
+                  ? `Aumentar (${PROGRESS_INCREMENT}%)`
+                  : "Completo!"
+            }}
+          </br-button>
+          <br-button
+            type="button"
+            variant="secondary"
+            density="small"
+            [disabled]="progress === 0"
+            (click)="resetarProgresso()"
+          >
+            Resetar
+          </br-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exemplo 4: v-model de progresso -->
+  <div class="br-card screen-preview mb-4">
+    <div class="screen-header">
+      <div class="screen-title">Exemplo 4: ngModel de progresso</div>
+    </div>
+    <div class="card-content">
+      <br-message state="info" class="mb-4" show-icon>
+        Controle de barra via <code>ngModel</code>.
+      </br-message>
+
+      <br-loading
+        is-progress
+        [progress-percent]="vmProgress"
+        ngDefaultControl
+        [(ngModel)]="vmProgress"
+        name="progressLoader"
+        [label]="vmProgress + '%'"
+      />
+
+      <div class="d-flex gap-2 mt-3">
+        <br-button
+          type="button"
+          density="small"
+          [disabled]="vmProgress >= 100"
+          (click)="increment()"
+        >
+          Aumentar ({{ vmProgress }}%)
+        </br-button>
+        <br-button
+          type="button"
+          density="small"
+          variant="secondary"
+          [disabled]="vmProgress === 0"
+          (click)="resetarVmProgress()"
+        >
+          Resetar
+        </br-button>
+      </div>
+
+      <div class="mt-3">
+        <p class="text-muted">
+          Valor atual do progresso: <strong>{{ vmProgress }}%</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

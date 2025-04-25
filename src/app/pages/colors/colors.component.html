@@ -1,0 +1,82 @@
+<div class="cores-container">
+  <header class="page-header">
+    <h1>Cores do Design System</h1>
+    <p class="subtitle">
+      Explore nossa paleta de cores e copie os valores facilmente
+    </p>
+  </header>
+
+  <div class="controls-container">
+    <div class="search-wrapper">
+      <div class="search-input-container">
+        <br-input
+          type="text"
+          ngDefaultControl
+          id="inputButtonRight"
+          [(ngModel)]="searchTerm"
+          placeholder="Buscar por nome, hex ou token..."
+        >
+          <br-icon
+            slot="action"
+            icon-name="fa-solid:search"
+            height="16"
+            aria-hidden="true"
+          ></br-icon>
+        </br-input>
+
+        <p *ngIf="!searchTerm">
+          Total de cores na paleta: {{ filteredColors.length }}
+        </p>
+        <p *ngIf="searchTerm && filteredColors.length">
+          Total de cores encontradas na busca: {{ filteredColors.length }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <br-message
+    *ngIf="mensagemVisivel"
+    state="info"
+    [message]="mensagemTexto"
+    is-inline
+    is-closable
+    show-icon
+    aria-label="info: Cor copiada com sucesso"
+    (click)="mensagemVisivel = false"
+  ></br-message>
+
+  <br-message
+    *ngIf="searchTerm && filteredColors.length === 0"
+    state="warning"
+    is-inline
+    show-icon
+    aria-label="warning: Nenhuma cor encontrada"
+  >
+    Nenhuma cor encontrada para a busca: "{{ searchTerm }}"
+  </br-message>
+
+  <div class="colors-grid" role="grid">
+    <div
+      *ngFor="let color of filteredColors"
+      class="color-card"
+      [ngStyle]="{ backgroundColor: color.hex }"
+      (click)="handleCardClick(color)"
+      [ngClass]="{ 'card-clicked': clickedCard === color.nome }"
+      role="gridcell"
+      tabindex="0"
+      (keypress.enter)="handleCardClick(color)"
+      [attr.aria-label]="'Cor ' + color.nome + '. Pressione Enter para copiar'"
+    >
+      <div
+        class="color-preview"
+        [ngStyle]="{ backgroundColor: color.hex }"
+      ></div>
+      <div class="color-info">
+        <h3>{{ color.nome }}</h3>
+        <p class="hex-value">{{ color.hex }}</p>
+        <p class="token-value">{{ color.token }}</p>
+        <span class="copy-hint">Clique para copiar</span>
+      </div>
+    </div>
+  </div>
+</div>

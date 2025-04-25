@@ -1,0 +1,53 @@
+.loading-container {
+  padding: 20px;
+  max-width: 900px; /* Opcional: Limita a largura para melhor leitura */
+  margin: auto; /* Opcional: Centraliza o container */
+}
+
+/*
+    Sugestão: Verifique a documentação do <br-card>.
+    Talvez seja possível usar slots (ex: <template #header>)
+    ou props para definir o título e o conteúdo,
+    reduzindo a necessidade das classes .screen-preview,
+    .screen-header, .screen-title e .card-content.
+  */
+.screen-preview {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  overflow: hidden;
+  margin-bottom: 1.5rem; /* Aumentei um pouco o espaçamento */
+}
+
+.screen-header {
+  background-color: #1351b4; /* Cor GOV.BR Azul */
+  color: white;
+  padding: 12px 18px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.screen-title {
+  font-size: 1.1rem;
+}
+
+.card-content {
+  padding: 20px;
+  background-color: white;
+}
+
+.card-content p {
+  /* Estilo para parágrafos dentro do card */
+  color: #555;
+  font-size: 0.95rem;
+}
+
+/* Ajustes finos opcionais */
+code {
+  background-color: #eee;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+}

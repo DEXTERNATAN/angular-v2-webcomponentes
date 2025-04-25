@@ -1,0 +1,476 @@
+<div class="formularios-validacao-container">
+  <h1 class="mb-4">Formulários com Validação</h1>
+
+  <!-- Cadastro de Usuário -->
+  <div class="br-card mb-5">
+    <div class="card-header"><h3>Validação de Formulários</h3></div>
+    <div class="card-content">
+      <p class="mb-4">
+        Exemplos de validação em tempo real, feedback visual e mensagens de
+        erro.
+      </p>
+      <p>
+        Erros:
+        {{
+          cadastroForm.get("termos")!.invalid &&
+            cadastroForm.get("termos")!.touched
+        }}
+      </p>
+      <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <br-input
+              formControlName="nome"
+              ngDefaultControl
+              [state]="
+                cadastroForm.get('nome')!.invalid &&
+                cadastroForm.get('nome')!.touched
+                  ? 'danger'
+                  : undefined
+              "
+              label="Nome Completo *"
+            ></br-input>
+            <br-message
+              *ngIf="cadastroForm.get('nome')!.hasError('required')"
+              state="danger"
+              is-feedback
+              message="O nome é obrigatório"
+            ></br-message>
+            <br-message
+              *ngIf="cadastroForm.get('nome')!.hasError('minlength')"
+              state="danger"
+              is-feedback
+              message="Mínimo 3 caracteres"
+            ></br-message>
+          </div>
+          <div class="col-md-6 mb-3">
+            <br-input
+              ngDefaultControl
+              formControlName="email"
+              type="email"
+              [state]="
+                cadastroForm.get('email')!.invalid &&
+                cadastroForm.get('email')!.touched
+                  ? 'danger'
+                  : undefined
+              "
+              label="E-mail *"
+            ></br-input>
+            <br-message
+              *ngIf="cadastroForm.get('email')!.hasError('required')"
+              state="danger"
+              is-feedback
+              message="O e-mail é obrigatório"
+            ></br-message>
+            <br-message
+              *ngIf="cadastroForm.get('email')!.hasError('email')"
+              state="danger"
+              is-feedback
+              message="Por favor, insira um e-mail válido"
+            ></br-message>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <br-input
+              ngDefaultControl
+              formControlName="cpf"
+              [state]="
+                cadastroForm.get('cpf')!.invalid &&
+                cadastroForm.get('cpf')!.touched
+                  ? 'danger'
+                  : undefined
+              "
+              label="CPF *"
+              placeholder="000.000.000-00"
+            ></br-input>
+            <br-message
+              *ngIf="cadastroForm.get('cpf')!.hasError('required')"
+              state="danger"
+              is-feedback
+              message="O CPF é obrigatório"
+            ></br-message>
+            <br-message
+              *ngIf="cadastroForm.get('cpf')!.hasError('pattern')"
+              state="danger"
+              is-feedback
+              message="Por favor, insira um CPF válido"
+            ></br-message>
+          </div>
+          <div class="col-md-6 mb-3">
+            <br-input
+              ngDefaultControl
+              formControlName="telefone"
+              [state]="
+                cadastroForm.get('telefone')!.invalid &&
+                cadastroForm.get('telefone')!.touched
+                  ? 'danger'
+                  : undefined
+              "
+              label="Telefone *"
+              placeholder="(00) 00000-0000"
+            ></br-input>
+            <br-message
+              *ngIf="cadastroForm.get('telefone')!.hasError('required')"
+              state="danger"
+              is-feedback
+              message="O telefone é obrigatório"
+            ></br-message>
+            <br-message
+              *ngIf="cadastroForm.get('telefone')!.hasError('pattern')"
+              state="danger"
+              is-feedback
+              message="Por favor, insira um telefone válido"
+            ></br-message>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <br-select
+              ngDefaultControl
+              [(ngModel)]="formulario.genero"
+              name="genero"
+              [options]="[
+                { label: 'Masculino', value: 'masculino' },
+                { label: 'Feminino', value: 'feminino' },
+                { label: 'Outro', value: 'outro' }
+              ]"
+              [attr.state]="erros.genero ? 'danger' : undefined"
+              label="Gênero *"
+              (blur)="validarCampo('genero')"
+            ></br-select>
+            <br-message
+              *ngIf="erros.genero"
+              state="danger"
+              is-feedback
+              [message]="erros.genero"
+              show-icon
+            ></br-message>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <br-input
+              ngDefaultControl
+              formControlName="senha"
+              [type]="mostrarSenha ? 'text' : 'password'"
+              [state]="
+                cadastroForm.get('senha')!.invalid &&
+                cadastroForm.get('senha')!.touched
+                  ? 'danger'
+                  : undefined
+              "
+              label="Senha *"
+            >
+              <button
+                slot="suffix"
+                class="br-button"
+                type="button"
+                (click)="mostrarSenha = !mostrarSenha"
+                aria-label="Alternar visibilidade"
+              >
+                <i
+                  [ngClass]="mostrarSenha ? 'fas fa-eye-slash' : 'fas fa-eye'"
+                ></i>
+              </button>
+            </br-input>
+            <br-message
+              *ngIf="cadastroForm.get('senha')!.hasError('required')"
+              state="danger"
+              is-feedback
+              message="A senha é obrigatória"
+            ></br-message>
+            <br-message
+              *ngIf="cadastroForm.get('senha')!.hasError('minlength')"
+              state="danger"
+              is-feedback
+              message="Mínimo 8 caracteres"
+            ></br-message>
+            <br-message
+              *ngIf="cadastroForm.get('senha')!.hasError('pattern')"
+              state="danger"
+              is-feedback
+              message="A senha deve incluir letras, números e caracteres especiais"
+            ></br-message>
+            <div
+              class="form-text"
+              *ngIf="
+                cadastroForm.get('senha')!.value &&
+                !cadastroForm.get('senha')!.hasError('pattern')
+              "
+            >
+              A senha deve ter pelo menos 8 caracteres, incluindo letras,
+              números e caracteres especiais.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <br-input
+              ngDefaultControl
+              formControlName="confirmarSenha"
+              [type]="mostrarConfirmarSenha ? 'text' : 'password'"
+              [state]="
+                cadastroForm.get('confirmarSenha')!.invalid &&
+                cadastroForm.get('confirmarSenha')!.touched
+                  ? 'danger'
+                  : undefined
+              "
+              label="Confirmar Senha *"
+            >
+              <button
+                slot="suffix"
+                class="br-button"
+                type="button"
+                (click)="mostrarConfirmarSenha = !mostrarConfirmarSenha"
+                aria-label="Alternar visibilidade"
+              >
+                <i
+                  [ngClass]="
+                    mostrarConfirmarSenha ? 'fas fa-eye-slash' : 'fas fa-eye'
+                  "
+                ></i>
+              </button>
+            </br-input>
+            <br-message
+              *ngIf="cadastroForm.get('confirmarSenha')!.hasError('required')"
+              state="danger"
+              is-feedback
+              message="A confirmação de senha é obrigatória"
+            ></br-message>
+            <br-message
+              *ngIf="cadastroForm.get('confirmarSenha')!.hasError('mismatch')"
+              state="danger"
+              is-feedback
+              message="As senhas não coincidem"
+            ></br-message>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-12 mb-3">
+            <br-checkbox
+              formControlName="termos"
+              [state]="
+                cadastroForm.get('termos')!.invalid &&
+                cadastroForm.get('termos')!.touched
+                  ? 'danger'
+                  : undefined
+              "
+              label="Li e concordo com os termos *"
+            ></br-checkbox>
+            <br-message
+              class="mt-2"
+              *ngIf="cadastroForm.get('termos')!.hasError('required')"
+              state="danger"
+              is-feedback
+              message="Você deve concordar com os termos"
+            ></br-message>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <br-button
+            type="button"
+            emphasis="secondary"
+            (click)="cadastroForm.reset()"
+          >
+            Limpar
+          </br-button>
+          <br-button type="submit" emphasis="primary">Cadastrar</br-button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Pesquisa Avançada -->
+  <div class="br-card mb-5">
+    <div class="card-header"><h3>Pesquisa Avançada</h3></div>
+    <div class="card-content">
+      <form (ngSubmit)="validarFormularioPesquisa()">
+        <div class="col-md-12 mb-3">
+          <br-input
+            ngDefaultControl
+            [(ngModel)]="formularioPesquisa.termo"
+            name="termoPesquisa"
+            [state]="errosPesquisa.termo ? 'danger' : undefined"
+            label="Termo de Pesquisa *"
+            (blur)="validarCampoPesquisa('termo')"
+          ></br-input>
+          <br-message
+            *ngIf="errosPesquisa.termo"
+            state="danger"
+            is-feedback
+            [message]="errosPesquisa.termo"
+            show-icon
+          ></br-message>
+        </div>
+
+        <div class="row mb-3">
+          <label>Categorias *</label>
+          <div *ngFor="let cat of categoriasList" class="br-checkbox mb-1">
+            <input
+              type="checkbox"
+              [id]="'cat-' + cat"
+              (change)="onCategoriaChange($event, cat)"
+            />
+            <label [for]="'cat-' + cat">{{ cat | titlecase }}</label>
+          </div>
+          <br-message
+            *ngIf="errosPesquisa.categorias"
+            state="danger"
+            is-feedback
+            [message]="errosPesquisa.categorias"
+            show-icon
+          ></br-message>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-6">
+            <br-input
+              ngDefaultControl
+              [(ngModel)]="formularioPesquisa.precoMin"
+              name="precoMin"
+              [state]="errosPesquisa.precoMin ? 'danger' : undefined"
+              label="Mínimo"
+              type="number"
+              (blur)="validarCampoPesquisa('precoMin')"
+            ></br-input>
+            <br-message
+              *ngIf="errosPesquisa.precoMin"
+              state="danger"
+              is-feedback
+              [message]="errosPesquisa.precoMin"
+              show-icon
+            ></br-message>
+          </div>
+          <div class="col-6">
+            <br-input
+              ngDefaultControl
+              [(ngModel)]="formularioPesquisa.precoMax"
+              name="precoMax"
+              [state]="errosPesquisa.precoMax ? 'danger' : undefined"
+              label="Máximo"
+              type="number"
+              (blur)="validarCampoPesquisa('precoMax')"
+            ></br-input>
+            <br-message
+              *ngIf="errosPesquisa.precoMax"
+              state="danger"
+              is-feedback
+              [message]="errosPesquisa.precoMax"
+              show-icon
+            ></br-message>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <br-button
+            type="button"
+            class="secondary"
+            (click)="limparFormularioPesquisa()"
+          >
+            Limpar
+          </br-button>
+          <br-button type="submit" class="primary">Pesquisar</br-button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Feedback de Validação -->
+  <div class="br-card mb-5">
+    <div class="card-header"><h3>Feedback de Validação</h3></div>
+    <div class="card-content">
+      <div class="row">
+        <div class="col-md-6">
+          <h4 class="mb-3">Mensagens de Erro</h4>
+          <br-message
+            state="danger"
+            message-title="Erro de Validação"
+            message="Este é um exemplo de erro para campos inválidos."
+            show-icon
+          ></br-message>
+          <br-message
+            state="warning"
+            message-title="Aviso"
+            message="Este é um exemplo de aviso."
+            show-icon
+          ></br-message>
+          <br-message
+            state="info"
+            message-title="Informação"
+            message="Este é um exemplo informativo."
+            show-icon
+          ></br-message>
+        </div>
+        <div class="col-md-6">
+          <h4 class="mb-3">Estados de Validação</h4>
+          <div class="validation-states">
+            <br-input label="Normal" placeholder="Sem validação"></br-input>
+
+            <br-input
+              state="success"
+              label="Sucesso"
+              aria-describedby="fb-success"
+            >
+              <br-message
+                id="fb-success"
+                slot="feedback"
+                state="success"
+                is-feedback
+                message="Campo correto."
+                show-icon
+              ></br-message>
+            </br-input>
+
+            <br-input
+              state="info"
+              label="Informação"
+              aria-describedby="fb-info"
+            >
+              <br-message
+                id="fb-info"
+                slot="feedback"
+                state="info"
+                is-feedback
+                message="Dica informativa."
+                show-icon
+              ></br-message>
+            </br-input>
+
+            <br-input
+              state="warning"
+              label="Alerta"
+              aria-describedby="fb-warning"
+            >
+              <br-message
+                id="fb-warning"
+                slot="feedback"
+                state="warning"
+                is-feedback
+                message="Verifique este campo."
+                show-icon
+              ></br-message>
+            </br-input>
+
+            <br-input state="danger" label="Erro" aria-describedby="fb-error">
+              <br-message
+                id="fb-error"
+                slot="feedback"
+                state="danger"
+                is-feedback
+                message="Erro de validação."
+                show-icon
+              ></br-message>
+            </br-input>
+
+            <br-input
+              disabled
+              label="Desabilitado"
+              placeholder="Desabilitado"
+            ></br-input>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

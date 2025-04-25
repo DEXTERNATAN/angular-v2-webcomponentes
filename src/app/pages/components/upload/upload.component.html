@@ -1,0 +1,211 @@
+<div class="upload-container" role="main">
+  <h1>Upload</h1>
+  <p>
+    Esta página demonstra o uso do componente
+    <code>&lt;br-upload&gt;</code>, com exemplos de estados, validação, preview,
+    envio e loading.
+  </p>
+
+  <br-message
+    show-icon
+    class="mb-4"
+    state="danger"
+    message="Use ngDefaultControl com [(ngModel)] nos componentes br-upload"
+  ></br-message>
+
+  <!-- 1. Upload simples -->
+  <div class="br-card screen-preview mb-4">
+    <div class="screen-header">
+      <div class="screen-title">1. Upload simples</div>
+    </div>
+    <div class="card-content d-flex flex-column justify-content-evenly p-4">
+      <br-upload label="Envio de arquivo"></br-upload>
+    </div>
+  </div>
+
+  <!-- 2. Upload com validação e feedback -->
+  <div class="br-card screen-preview mb-4">
+    <div class="screen-header">
+      <div class="screen-title">2. Com validação e feedback</div>
+    </div>
+    <div class="card-content d-flex flex-column justify-content-evenly p-4">
+      <br-upload
+        label="Envio de arquivo"
+        state="danger"
+        accept="image/png, image/jpeg"
+      ></br-upload>
+      <br-message
+        class="spacing-feedback mt-2"
+        state="danger"
+        is-feedback
+        message="Os arquivos devem ser no formato PNG ou JPG e ter no máximo 100MB."
+        show-icon
+        aria-label="Os arquivos devem ser no formato PNG ou JPG e ter no máximo 100MB."
+      ></br-message>
+    </div>
+  </div>
+
+  <!-- 3. Upload múltiplo -->
+  <div class="br-card screen-preview mb-4">
+    <div class="screen-header">
+      <div class="screen-title">3. Upload múltiplo</div>
+    </div>
+    <div class="card-content d-flex flex-column justify-content-evenly p-4">
+      <br-upload label="Envio de arquivos" multiple></br-upload>
+    </div>
+  </div>
+
+  <!-- 4. Upload desabilitado -->
+  <div class="br-card screen-preview mb-4">
+    <div class="screen-header">
+      <div class="screen-title">4. Upload desabilitado</div>
+    </div>
+    <div class="card-content d-flex flex-column justify-content-evenly p-4">
+      <br-upload label="Envio de arquivo" disabled></br-upload>
+      <br-message
+        class="spacing-feedback mt-2"
+        state="warning"
+        is-feedback
+        message="Upload desabilitado"
+        show-icon
+        aria-label="Upload desabilitado"
+      ></br-message>
+    </div>
+  </div>
+
+  <!-- 5. Upload com preview, validação e envio -->
+  <div class="br-card screen-preview mb-4">
+    <div class="screen-header">
+      <div class="screen-title">5. Upload com preview e envio</div>
+    </div>
+    <div class="card-content d-flex flex-column justify-content-evenly p-4">
+      <br-upload
+        label="Selecione uma imagem (JPG ou PNG, até 5MB)"
+        accept="image/png, image/jpeg"
+        (change)="handleFile($event)"
+        #uploadRef
+        multiple
+      ></br-upload>
+
+      <img
+        *ngIf="previewUrl"
+        [src]="previewUrl"
+        alt="Pré-visualização"
+        class="img-preview mt-3"
+      />
+
+      <br-message
+        *ngIf="mensagem"
+        class="mt-2"
+        [state]="estadoMensagem"
+        is-feedback
+        [message]="mensagem"
+        show-icon
+        [attr.aria-label]="mensagem"
+      ></br-message>
+
+      <br-button
+        *ngIf="arquivoValido && !isLoading"
+        class="mt-3"
+        (click)="enviarArquivo()"
+      >
+        Enviar arquivo
+      </br-button>
+
+      <div *ngIf="isLoading" class="mt-3">
+        <br-loading label="Enviando arquivo..." is-medium></br-loading>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Exemplo com ngModel -->
+  <div class="br-card screen-preview mb-4">
+    <div class="screen-header">
+      <div class="screen-title">6. Exemplo com ngModel</div>
+    </div>
+    <div class="card-content d-flex flex-column justify-content-evenly p-4">
+      <br-upload
+        ngDefaultControl
+        label="Envio via ngModel"
+        multiple
+        [(ngModel)]="arquivos"
+        name="uploadArquivos"
+      ></br-upload>
+
+      <div class="mt-3">
+        <div class="d-flex justify-content-between align-items-center">
+          <p class="mb-2">
+            <strong>Arquivos selecionados ({{ arquivos.length }}):</strong>
+          </p>
+          <div class="button-container">
+            <br-button
+              ngDefaultControl
+              density="small"
+              emphasis="secondary"
+              (click)="limparArquivos()"
+              *ngIf="arquivos.length > 0"
+            >
+              Limpar todos
+            </br-button>
+          </div>
+        </div>
+
+        <div class="file-list" *ngIf="arquivos.length > 0">
+          <div class="file-item" *ngFor="let file of arquivos; let i = index">
+            <div class="file-info">
+              <div
+                class="file-icon"
+                7
+                [ngClass]="getFileIconClass(file.type)"
+              ></div>
+              <div class="file-details">
+                <span class="file-name">{{ file.name }}</span>
+                <span class="file-meta"
+                  >{{ (file.size / 1024 / 1024).toFixed(2) }} MB |
+                  {{ file.type || "Tipo desconhecido" }}</span
+                >
+              </div>
+            </div>
+            <div class="file-actions">
+              <br-button
+                *ngIf="file.type.startsWith('image/')"
+                circle
+                density="small"
+                (click)="visualizarImagem(file)"
+                title="Visualizar imagem"
+              >
+                👁️
+              </br-button>
+              <br-button
+                circle
+                density="small"
+                (click)="removerArquivo(i)"
+                title="Remover arquivo"
+              >
+                ×
+              </br-button>
+            </div>
+          </div>
+        </div>
+
+        <div class="empty-state" *ngIf="arquivos.length === 0">
+          <p>Nenhum arquivo selecionado</p>
+        </div>
+
+        <div class="upload-stats mt-3" *ngIf="arquivos.length > 0">
+          <p>Total: {{ getTotalSize() }} MB</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de visualização -->
+  <div class="preview-modal" *ngIf="previewImageUrl" (click)="fecharPreview()">
+    <div class="preview-content">
+      <img [src]="previewImageUrl" alt="Pré-visualização" />
+      <br-button circle class="close-btn" (click)="fecharPreview()">
+        ×
+      </br-button>
+    </div>
+  </div>
+</div>

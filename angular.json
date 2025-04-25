@@ -33,6 +33,7 @@
             ],
             "styles": [
               "src/styles.scss",
+              "node_modules/@govbr-ds/core/dist/core.min.css",
               "node_modules/@govbr-ds/core/dist/core-tokens.min.css"
             ],
             "scripts": []

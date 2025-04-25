@@ -1,0 +1,25 @@
+<div class="breadcrumb-container" role="main">
+  <h1>Breadcrumb</h1>
+  <p>
+    Esta página demonstra o uso do componente
+    <code>&lt;br-breadcrumb&gt;</code>, que permite a navegação hierárquica
+    entre as páginas do sistema.
+  </p>
+
+  <br-message
+    state="success"
+    message="Nenhuma inconsistência encontrada neste componente."
+    show-icon
+    class="mb-4"
+  />
+
+  <!-- Exemplo de Breadcrumb -->
+  <div class="br-card screen-preview mb-4">
+    <div class="screen-header">
+      <div class="screen-title">Exemplo de Breadcrumb</div>
+    </div>
+    <div class="card-content">
+      <br-breadcrumb [crumbs]="links" home-url="/dashboard" />
+    </div>
+  </div>
+</div>

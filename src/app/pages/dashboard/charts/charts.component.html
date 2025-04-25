@@ -1,0 +1,144 @@
+<!-- graficos.component.html -->
+<div class="row mb-4">
+  <div class="col-md-12">
+    <div class="graficos-container">
+      <h1>Gráficos</h1>
+      <p>
+        Nesta página você encontra uma coleção de gráficos interativos,
+        desenvolvidos com Chart.js e integrados ao Design System BR. ...
+      </p>
+
+      <!-- Análise de Dados -->
+      <div class="section-title mb-3"><h2>Análise de Dados</h2></div>
+      <div class="row mb-4">
+        <!-- Barras -->
+        <div class="col-md-6">
+          <div class="br-card screen-preview">
+            <div class="screen-header">
+              <div class="screen-title">Gráfico de Barras</div>
+              <div class="card-actions">
+                <br-button
+                  emphasis="tertiary"
+                  shape="circle"
+                  size="small"
+                  aria-label="Atualizar dados"
+                  (click)="updateBarData()"
+                >
+                  <i class="fas fa-sync-alt" aria-hidden="true"></i>
+                </br-button>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="chart-container">
+                <canvas #barChart></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Linhas -->
+        <div class="col-md-6">
+          <div class="br-card screen-preview">
+            <div class="screen-header">
+              <div class="screen-title">Gráfico de Linha</div>
+              <div class="card-actions">
+                <br-button
+                  shape="circle"
+                  size="small"
+                  aria-label="Atualizar dados"
+                  (click)="updateLineData()"
+                >
+                  <i class="fas fa-sync-alt" aria-hidden="true"></i>
+                </br-button>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="chart-container">
+                <canvas #lineChart></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Distribuição -->
+      <div class="section-title mb-3"><h2>Distribuição</h2></div>
+      <div class="row mb-4">
+        <!-- Pizza -->
+        <div class="col-md-6">
+          <div class="br-card screen-preview">
+            <div class="screen-header">
+              <div class="screen-title">Gráfico de Pizza</div>
+              <div class="card-actions">
+                <br-button
+                  shape="circle"
+                  size="small"
+                  aria-label="Atualizar dados"
+                  (click)="updatePieData()"
+                >
+                  <i class="fas fa-sync-alt" aria-hidden="true"></i>
+                </br-button>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="chart-container">
+                <canvas #pieChart></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Área -->
+        <div class="col-md-6">
+          <div class="br-card screen-preview">
+            <div class="screen-header">
+              <div class="screen-title">Gráfico de Área</div>
+              <div class="card-actions">
+                <br-button
+                  shape="circle"
+                  size="small"
+                  aria-label="Atualizar dados"
+                  (click)="updateAreaData()"
+                >
+                  <i class="fas fa-sync-alt" aria-hidden="true"></i>
+                </br-button>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="chart-container">
+                <canvas #areaChart></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparação -->
+      <div class="section-title mb-3"><h2>Comparação</h2></div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="br-card screen-preview">
+            <div class="screen-header">
+              <div class="screen-title">Gráfico de Radar</div>
+              <div class="card-actions">
+                <br-button
+                  shape="circle"
+                  size="small"
+                  aria-label="Atualizar dados"
+                  (click)="updateRadarData()"
+                >
+                  <i class="fas fa-sync-alt" aria-hidden="true"></i>
+                </br-button>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="chart-container">
+                <canvas #radarChart></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

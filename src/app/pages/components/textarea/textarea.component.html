@@ -1,0 +1,168 @@
+<div class="textarea-container" role="main">
+  <h1>Textarea</h1>
+  <p>
+    Esta página demonstra o uso do componente
+    <code>&lt;br-textarea&gt;</code>, que permite a inserção de textos em
+    múltiplas linhas com diferentes estados visuais, densidades e recursos
+    adicionais.
+  </p>
+
+  <br-message
+    state="danger"
+    message="Use ngDefaultControl e name com [(ngModel)] nos componentes br-textarea"
+    show-icon
+    class="mb-4"
+  ></br-message>
+
+  <!-- Grupo 1: Densidade -->
+  <div class="br-card screen-preview mb-4">
+    <div class="screen-header">
+      <div class="screen-title">1. Variações de Densidade</div>
+    </div>
+    <div class="card-content d-flex flex-wrap justify-content-evenly p-4">
+      <br-textarea
+        label="Densidade baixa"
+        density="small"
+        class="mr-2"
+        placeholder="Digite somente números"
+      ></br-textarea>
+      <br-textarea
+        label="Densidade alta"
+        density="large"
+        class="mr-2"
+        placeholder="Digite somente números"
+      ></br-textarea>
+    </div>
+  </div>
+
+  <!-- Grupo 2: Com contador de caracteres -->
+  <div class="br-card screen-preview mb-4">
+    <div class="screen-header">
+      <div class="screen-title">2. Com contador de caracteres</div>
+    </div>
+    <div class="card-content d-flex flex-wrap justify-content-evenly p-4">
+      <br-textarea
+        show-counter
+        density="small"
+        maxlength="100"
+        defaultId="meu-textarea-contador"
+        label="Textarea com contador"
+        placeholder="Digite somente números"
+      ></br-textarea>
+    </div>
+  </div>
+
+  <!-- Grupo 3: Inline com ajuda -->
+  <div class="br-card screen-preview mb-4">
+    <div class="screen-header">
+      <div class="screen-title">3. Inline com ajuda</div>
+    </div>
+    <div class="card-content d-flex flex-wrap justify-content-evenly p-4">
+      <br-textarea
+        is-inline
+        density="small"
+        state="success"
+        label="Label à esquerda"
+        placeholder="Exemplo de textarea com sucesso"
+      >
+        <p class="text-base mt-1">Texto auxiliar ao preenchimento.</p>
+      </br-textarea>
+    </div>
+  </div>
+
+  <!-- Grupo 4: Estados visuais -->
+  <div class="br-card screen-preview mb-4">
+    <div class="screen-header">
+      <div class="screen-title">4. Estados visuais</div>
+    </div>
+    <div class="card-content d-flex flex-wrap justify-content-evenly p-4">
+      <br-textarea
+        state="success"
+        density="small"
+        class="mr-2"
+        placeholder="Exemplo de textarea com sucesso"
+      ></br-textarea>
+      <br-textarea
+        state="danger"
+        density="large"
+        class="mr-2"
+        placeholder="Exemplo de textarea com erro"
+      ></br-textarea>
+      <br-textarea
+        density="large"
+        disabled
+        placeholder="Exemplo de textarea desabilitado"
+      ></br-textarea>
+    </div>
+  </div>
+
+  <!-- Grupo 5: Validação dinâmica com feedback -->
+  <div class="br-card screen-preview mb-4">
+    <div class="screen-header">
+      <div class="screen-title">5. Interação com validação dinâmica</div>
+    </div>
+    <div class="card-content p-4">
+      <br-textarea
+        label="Comentário"
+        placeholder="Digite ao menos 10 caracteres..."
+        ngDefaultControl
+        name="comentario"
+        [(ngModel)]="comentario"
+        (ngModelChange)="validarComentario()"
+        [state]="comentarioState"
+      ></br-textarea>
+
+      <p
+        class="mt-2"
+        [ngStyle]="{
+          color: comentarioState === 'danger' ? '#c53030' : '#2e7d32'
+        }"
+      >
+        {{ mensagemValidacao }}
+      </p>
+
+      <div class="mt-3 button-container">
+        <button class="br-button secondary small" (click)="limparCampos()">
+          Limpar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grupo 6: Exemplo básico com ngModel -->
+  <div class="br-card screen-preview mb-4">
+    <div class="screen-header">
+      <div class="screen-title">6. Exemplo básico com ngModel</div>
+    </div>
+    <div class="card-content p-4">
+      <br-textarea
+        ngDefaultControl
+        name="texto-livre"
+        label="Textarea (ngModel)"
+        placeholder="Digite algo aqui..."
+        [(ngModel)]="texto"
+        show-counter
+        maxlength="200"
+      ></br-textarea>
+      <p class="mt-2">
+        Você digitou: <strong>{{ texto }}</strong>
+        <br />
+        <small class="text-muted">Caracteres: {{ texto.length }}/200</small>
+      </p>
+
+      <div class="mt-3 button-container d-flex gap-2">
+        <button class="br-button primary small" (click)="preencherExemplo()">
+          Preencher com exemplo
+        </button>
+        <button class="br-button secondary small" (click)="limparCampos()">
+          Limpar
+        </button>
+      </div>
+
+      <div class="model-data mt-4 p-3" *ngIf="texto">
+        <h4>Valor do modelo</h4>
+        <pre>texto = "{{ texto }}"</pre>
+      </div>
+    </div>
+  </div>
+</div>

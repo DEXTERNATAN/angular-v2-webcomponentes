@@ -1,0 +1,42 @@
+.checkbox-container {
+  padding: 20px;
+}
+
+.screen-preview {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  overflow: hidden;
+}
+
+.screen-header {
+  background-color: #1351b4;
+  color: white;
+  padding: 10px 15px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.screen-title {
+  font-size: 1.1rem;
+}
+
+.card-content {
+  padding: 20px;
+  background-color: white;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.checkbox-group.horizontal {
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+}

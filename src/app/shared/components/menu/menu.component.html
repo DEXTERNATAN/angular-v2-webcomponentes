@@ -1,0 +1,95 @@
+<div class="menu-body" role="tree">
+  <ng-container *ngFor="let folder of menuItems">
+    <div class="menu-folder drop-menu" [class.active]="folder.expanded">
+      <!-- Item sem submenu -->
+      <a
+        *ngIf="!folder.children?.length"
+        [routerLink]="folder.url"
+        class="menu-item"
+        role="treeitem"
+        tabindex="0"
+        [routerLinkActive]="'active'"
+        [attr.aria-current]="itemAtivo === folder.id ? 'true' : null"
+        (click)="itemAtivo = folder.id"
+      >
+        <span class="icon"
+          ><i [class]="folder.icon" aria-hidden="true"></i
+        ></span>
+        <span class="content">{{ folder.name }}</span>
+      </a>
+
+      <!-- Item com submenu -->
+      <ng-container *ngIf="folder.children?.length">
+        <a
+          class="menu-item"
+          role="treeitem"
+          tabindex="0"
+          [attr.aria-expanded]="folder.expanded"
+          [class.active]="itemAtivo === folder.id"
+          (click)="toggleFolder(folder.id)"
+          (keydown.enter)="toggleFolder(folder.id)"
+        >
+          <span class="icon"
+            ><i [class]="folder.icon" aria-hidden="true"></i
+          ></span>
+          <span class="content">{{ folder.name }}</span>
+          <span class="support"
+            ><i class="fas fa-chevron-down" aria-hidden="true"></i
+          ></span>
+        </a>
+
+        <ul *ngIf="folder.expanded" class="list-hide" role="group">
+          <li *ngFor="let child of folder.children">
+            <a
+              [routerLink]="child.url"
+              class="menu-item"
+              role="treeitem"
+              tabindex="0"
+              [routerLinkActive]="'active'"
+              [attr.aria-current]="itemAtivo === child.id ? 'true' : null"
+              (click)="itemAtivo = child.id"
+            >
+              <span class="icon"
+                ><i [class]="child.icon" aria-hidden="true"></i
+              ></span>
+              <span class="content">{{ child.name }}</span>
+            </a>
+
+            <!-- Subitens -->
+            <ul *ngIf="child.children?.length" role="group">
+              <li *ngFor="let sub of child.children">
+                <a
+                  [routerLink]="sub.url"
+                  class="menu-item"
+                  role="treeitem"
+                  tabindex="0"
+                  [routerLinkActive]="'active'"
+                  [attr.aria-current]="itemAtivo === sub.id ? 'true' : null"
+                  (click)="itemAtivo = sub.id"
+                >
+                  <span class="icon"
+                    ><i [class]="sub.icon" aria-hidden="true"></i
+                  ></span>
+                  <span class="content">{{ sub.name }}</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </ng-container>
+    </div>
+  </ng-container>
+
+  <a
+    [routerLink]="project.url"
+    class="menu-item divider"
+    role="treeitem"
+    tabindex="0"
+    [routerLinkActive]="'active'"
+    [attr.aria-current]="itemAtivo === 'project' ? 'true' : null"
+    (click)="itemAtivo = 'project'"
+  >
+    <span class="icon"><i [class]="project.icon" aria-hidden="true"></i></span>
+    <span class="content">{{ project.name }}</span>
+  </a>
+</div>

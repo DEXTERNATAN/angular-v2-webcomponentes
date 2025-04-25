@@ -1,0 +1,95 @@
+<div class="select-container" role="main">
+  <h1>Select</h1>
+  <p>
+    Esta página demonstra o uso do componente <code>&lt;br-select&gt;</code>,
+    que permite a seleção de opções em um menu suspenso.
+  </p>
+
+  <!-- Aviso sobre erro conhecido -->
+  <br-message
+    show-icon
+    class="mb-4"
+    state="danger"
+    message="Use ngDefaultControl junto com [(ngModel)] para o componente br-select"
+  ></br-message>
+
+  <!-- 1. Select Simples -->
+  <div class="br-card screen-preview mb-4">
+    <div class="screen-header">
+      <div class="screen-title">1. Select Simples</div>
+    </div>
+    <div class="card-content d-flex justify-content-evenly mt-5 p-4">
+      <br-select
+        ngDefaultControl
+        label="Label"
+        placeholder="Selecione uma opção"
+        [options]="simpleOptions"
+      ></br-select>
+    </div>
+  </div>
+
+  <!-- 2. Select com Busca -->
+  <div class="br-card screen-preview mb-4">
+    <div class="screen-header">
+      <div class="screen-title">2. Select com Busca</div>
+    </div>
+    <div class="card-content d-flex justify-content-evenly mt-5 p-4">
+      <br-select
+        ngDefaultControl
+        show-search-icon
+        label="Label"
+        placeholder="Selecione uma opção"
+        [options]="simpleOptions"
+      ></br-select>
+    </div>
+  </div>
+
+  <!-- 3. Select Múltiplo com Marcar Todos -->
+  <div class="br-card screen-preview mb-4">
+    <div class="screen-header">
+      <div class="screen-title">3. Select Multiple</div>
+    </div>
+    <div class="card-content d-flex justify-content-evenly mt-5 p-4">
+      <br-select
+        ngDefaultControl
+        [(ngModel)]="selectedTechs"
+        name="select-techs"
+        label="Tecnologias favoritas"
+        [options]="multiSelectOptions"
+        select-all-label="Selecionar todas"
+        unselect-all-label="Remover todas"
+        is-multiple
+        show-search-icon
+        placeholder="Selecione tecnologias"
+      ></br-select>
+      <p class="mt-3" *ngIf="selectedTechs && selectedTechs.length > 0">
+        Tecnologias selecionadas:
+        <strong>{{ selectedTechs.join(", ") }}</strong>
+        <br />
+        <small class="text-muted"
+          >Total de itens selecionados: {{ selectedTechs.length }}</small
+        >
+      </p>
+    </div>
+  </div>
+
+  <!-- 4. Equivalente ao seu v-model -->
+  <div class="br-card screen-preview">
+    <div class="screen-header">
+      <div class="screen-title">4. Select com ngModel Simples</div>
+    </div>
+    <div class="card-content p-4">
+      <br-select
+        ngDefaultControl
+        [(ngModel)]="selectedCar"
+        name="select-car"
+        label="Carro favorito"
+        placeholder="Escolha um carro"
+        [options]="carOptions"
+      ></br-select>
+      <p class="mt-3">
+        Carro selecionado: <strong>{{ selectedCar }}</strong>
+      </p>
+    </div>
+  </div>
+</div>

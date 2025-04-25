@@ -1,18 +1,49 @@
-<main class="main">
-  <section class="content">
-    <h2>Exemplo de utilização do componente <code>br-button</code></h2>
-    <p>Este é um botão com ênfase primária:</p>
-    <br-input></br-input>
-    <br-button emphasis="primary">Bem-vindo!</br-button>
+<!-- Estrutura base convertida de Vue para Angular -->
+<main class="template-base">
+  <nav class="br-skiplink" role="menubar">
+    <a class="br-item" href="#main-content" role="menuitem" accesskey="1">
+      Ir para o conteúdo <span aria-hidden="true">(1/4)</span>
+      <span aria-hidden="true" class="br-tag text ml-1">1</span>
+    </a>
+    <a class="br-item" href="#header-navigation" role="menuitem" accesskey="2">
+      Ir para o menu <span aria-hidden="true">(2/4)</span>
+      <span aria-hidden="true" class="br-tag text ml-1">2</span>
+    </a>
+    <a class="br-item" href="#main-searchbox" role="menuitem" accesskey="3">
+      Ir para a busca <span aria-hidden="true">(3/4)</span>
+      <span aria-hidden="true" class="br-tag text ml-1">3</span>
+    </a>
+    <a class="br-item" href="#footer" role="menuitem" accesskey="4">
+      Ir para o rodapé <span aria-hidden="true">(4/4)</span>
+      <span aria-hidden="true" class="br-tag text ml-1">4</span>
+    </a>
+  </nav>
+
+  <app-header [menuVisible]="isMenuVisible" (menuToggle)="toggleMenu()">
+  </app-header>
+
+  <section class="d-flex flex-fill mb-5" id="main">
+    <div class="container-fluid d-flex">
+      <div class="row">
+        <aside
+          class="br-menu push active"
+          id="main-navigation"
+          [style.display]="isMenuVisible ? 'block' : 'none'"
+          style="width: 250px"
+        >
+          <app-menu></app-menu>
+        </aside>
+
+        <section class="col mb-5">
+          <!-- <app-breadcrumb></app-breadcrumb> -->
+          <div class="main-content pl-sm-3 mt-4" id="main-content">
+            <router-outlet></router-outlet>
+          </div>
+        </section>
+      </div>
+    </div>
   </section>
+
+  <app-footer></app-footer>
+  <div class="br-cookiebar default d-none" tabindex="-1"></div>
 </main>
-
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-<router-outlet />

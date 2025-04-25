@@ -1,0 +1,127 @@
+<div class="switch-container" role="main">
+  <h1>Switch</h1>
+  <p>
+    Esta página demonstra o uso do componente <code>&lt;br-switch&gt;</code>,
+    que permite alternar estados binários (ativado/desativado).
+  </p>
+
+  <br-message
+    show-icon
+    class="mb-4"
+    state="danger"
+    message="Use ngDefaultControl para o componente br-switch funcionar com [(ngModel)]"
+  ></br-message>
+
+  <!-- 1. Variação de Densidade -->
+  <div class="br-card screen-preview mb-4">
+    <div class="screen-header">
+      <div class="screen-title">1. Variação de Densidade</div>
+    </div>
+    <div class="card-content d-flex flex-wrap justify-content-evenly">
+      <br-switch id="switch-small" density="small" checked>
+        Densidade Alta
+      </br-switch>
+      <br-switch id="switch-medium" checked>
+        Densidade Média (Padrão)
+      </br-switch>
+      <br-switch id="switch-large" density="large" checked>
+        Densidade Baixa
+      </br-switch>
+    </div>
+  </div>
+
+  <!-- 2. Com Ícone -->
+  <div class="br-card screen-preview mb-4">
+    <div class="screen-header">
+      <div class="screen-title">2. Com Ícone</div>
+    </div>
+    <div class="card-content d-flex flex-wrap justify-content-evenly">
+      <br-switch id="switch-icon" has-icon checked> Label </br-switch>
+    </div>
+  </div>
+
+  <!-- 3. Posições da Label -->
+  <div class="br-card screen-preview mb-4">
+    <div class="screen-header">
+      <div class="screen-title">3. Posições da Label</div>
+    </div>
+    <div class="card-content d-flex flex-wrap justify-content-evenly">
+      <div class="col-md mt-3">
+        <br-switch id="switch-default" label="Prop Label" checked> </br-switch>
+      </div>
+      <div class="col-md mt-3">
+        <br-switch id="switch-left" checked> Label na esquerda </br-switch>
+      </div>
+      <div class="col-md mt-3">
+        <br-switch id="switch-right" label-position="right" checked>
+          Label na direita
+        </br-switch>
+      </div>
+      <div class="col-md mt-3">
+        <br-switch id="switch-top" label-position="top" checked>
+          Label no topo
+        </br-switch>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Label On/Off -->
+  <div class="br-card screen-preview mb-4">
+    <div class="screen-header">
+      <div class="screen-title">4. Label On/Off</div>
+    </div>
+    <div class="card-content d-flex flex-wrap justify-content-evenly">
+      <br-switch
+        id="switch-label-01"
+        label-on="Ligado"
+        label-off="Desligado"
+        checked
+      >
+        Label
+      </br-switch>
+    </div>
+  </div>
+
+  <!-- 5. Desabilitado -->
+  <div class="br-card screen-preview mb-4">
+    <div class="screen-header">
+      <div class="screen-title">5. Desabilitado</div>
+    </div>
+    <div class="card-content d-flex flex-wrap justify-content-evenly">
+      <br-switch id="switch-disabled" disabled checked> Disabled </br-switch>
+    </div>
+  </div>
+
+  <!-- 6. Exemplo com ngModel -->
+  <div class="br-card screen-preview mb-4">
+    <div class="screen-header">
+      <div class="screen-title">6. Exemplo com ngModel</div>
+    </div>
+    <div class="card-content d-flex flex-column align-items-center p-4">
+      <br-switch
+        ngDefaultControl
+        [(ngModel)]="isToggled"
+        label="Ativar recurso"
+        name="feature-toggle"
+      >
+        Usando ngModel
+      </br-switch>
+
+      <p class="mt-3">
+        Estado atual:
+        <strong [ngClass]="isToggled ? 'text-success' : 'text-danger'">
+          {{ isToggled ? "Ligado" : "Desligado" }}
+        </strong>
+      </p>
+
+      <br-button class="mt-3" emphasis="secondary" (click)="toggleState()">
+        Inverter estado programaticamente
+      </br-button>
+
+      <div class="mt-4 p-3 border rounded" *ngIf="isToggled">
+        <p class="text-success">✓ Recurso ativado com sucesso!</p>
+        <p>Este conteúdo só aparece quando o switch está ligado.</p>
+      </div>
+    </div>
+  </div>
+</div>

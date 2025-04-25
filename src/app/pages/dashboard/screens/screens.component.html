@@ -1,0 +1,416 @@
+<!-- exemplo-telas.component.html -->
+<div class="telas-container" role="main">
+  <h1>Telas de Exemplo</h1>
+
+  <!-- Login -->
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="br-card">
+        <div class="card-header"><h2>Telas de Login</h2></div>
+        <div class="card-content">
+          <div class="row">
+            <!-- Login Padrão -->
+            <div class="col-md-6">
+              <div class="screen-preview">
+                <div class="screen-header">
+                  <div class="screen-title">Login Padrão</div>
+                </div>
+                <div class="screen-body">
+                  <div class="login-form">
+                    <div class="br-input mb-3">
+                      <br-input
+                        id="login-email"
+                        type="email"
+                        label="E-mail"
+                        placeholder="seu.email@exemplo.com"
+                      ></br-input>
+                    </div>
+                    <div class="br-input input-button mb-3">
+                      <br-input
+                        id="login-password"
+                        type="password"
+                        label="Senha"
+                        placeholder="Digite sua senha"
+                      ></br-input>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                      <div class="br-checkbox">
+                        <input id="remember-me" type="checkbox" />
+                        <label for="remember-me">Lembrar-me</label>
+                      </div>
+                      <a href="#" class="text-primary">Esqueceu a senha?</a>
+                    </div>
+                    <br-button emphasis="primary" shape="block"
+                      >Entrar</br-button
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Login Social -->
+            <div class="col-md-6">
+              <div class="screen-preview">
+                <div class="screen-header">
+                  <div class="screen-title">Login com Redes Sociais</div>
+                </div>
+                <div class="screen-body">
+                  <div class="login-form">
+                    <div class="br-input mb-3">
+                      <br-input
+                        id="login-email-2"
+                        type="email"
+                        label="E-mail"
+                        placeholder="seu.email@exemplo.com"
+                      ></br-input>
+                    </div>
+                    <div class="br-input input-button mb-3">
+                      <br-input
+                        id="login-password-2"
+                        type="password"
+                        label="Senha"
+                        placeholder="Digite sua senha"
+                      ></br-input>
+                    </div>
+                    <br-button emphasis="primary" shape="block" class="mb-3"
+                      >Entrar</br-button
+                    >
+                    <div class="divider"><span>ou entre com</span></div>
+                    <div class="social-login">
+                      <br-button shape="circle" aria-label="Google">
+                        <i class="fab fa-google" aria-hidden="true"></i>
+                      </br-button>
+                      <br-button shape="circle" aria-label="Facebook">
+                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                      </br-button>
+                      <br-button shape="circle" aria-label="Twitter">
+                        <i class="fab fa-twitter" aria-hidden="true"></i>
+                      </br-button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="br-card">
+        <div class="card-header"><h3>Telas de Dashboard</h3></div>
+        <div class="card-content">
+          <div class="row">
+            <!-- Dashboard Principal -->
+            <div class="col-md-6">
+              <div class="screen-preview">
+                <div class="screen-header">
+                  <div class="screen-title">Dashboard Principal</div>
+                </div>
+                <div class="screen-body">
+                  <div class="dashboard-layout">
+                    <div class="dashboard-header">
+                      <div class="dashboard-title">Bem-vindo, Usuário</div>
+                      <div class="dashboard-actions">
+                        <br-button shape="circle" aria-label="Notificações">
+                          <i class="fas fa-bell" aria-hidden="true"></i>
+                        </br-button>
+                        <br-button shape="circle" aria-label="Configurações">
+                          <i class="fas fa-cog" aria-hidden="true"></i>
+                        </br-button>
+                      </div>
+                    </div>
+                    <div class="dashboard-stats">
+                      <div class="stat-card">
+                        <div class="stat-icon">
+                          <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                          <div class="stat-value">1,234</div>
+                          <div class="stat-label">Usuários</div>
+                        </div>
+                      </div>
+                      <div class="stat-card">
+                        <div class="stat-icon">
+                          <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="stat-info">
+                          <div class="stat-value">567</div>
+                          <div class="stat-label">Pedidos</div>
+                        </div>
+                      </div>
+                      <div class="stat-card">
+                        <div class="stat-icon">
+                          <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-info">
+                          <div class="stat-value">R$ 12.345</div>
+                          <div class="stat-label">Receita</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="dashboard-chart">
+                      <canvas #salesChart></canvas>
+                    </div>
+                    <div class="dashboard-table">
+                      <canvas #performanceChart></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Dashboard de Análise -->
+            <div class="col-md-6">
+              <div class="screen-preview">
+                <div class="screen-header">
+                  <div class="screen-title">Dashboard de Análise</div>
+                </div>
+                <div class="screen-body">
+                  <div class="dashboard-layout">
+                    <div class="dashboard-header">
+                      <div class="dashboard-title">Análise de Desempenho</div>
+                      <div class="dashboard-filter">
+                        <br-select
+                          density="small"
+                          show-search-icon
+                          label="Período"
+                          placeholder="Selecione"
+                          [options]="[
+                            { label: 'Últimos 7 dias', value: '7' },
+                            { label: 'Últimos 30 dias', value: '30' },
+                            { label: 'Últimos 90 dias', value: '90' }
+                          ]"
+                        >
+                        </br-select>
+                      </div>
+                    </div>
+                    <div class="dashboard-chart-large">
+                      <canvas #analysisChart></canvas>
+                    </div>
+                    <div class="dashboard-metrics">
+                      <div class="metric-card">
+                        <div class="metric-title">Taxa de Conversão</div>
+                        <div class="metric-value">3.2%</div>
+                        <div class="metric-change positive">+0.5%</div>
+                      </div>
+                      <div class="metric-card">
+                        <div class="metric-title">Tempo Médio</div>
+                        <div class="metric-value">2m 45s</div>
+                        <div class="metric-change negative">-15s</div>
+                      </div>
+                      <div class="metric-card">
+                        <div class="metric-title">Taxa de Rejeição</div>
+                        <div class="metric-value">42%</div>
+                        <div class="metric-change negative">+2%</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulários -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="br-card">
+        <div class="card-header"><h3>Telas de Formulários</h3></div>
+        <div class="card-content">
+          <div class="row">
+            <!-- Formulário de Cadastro -->
+            <div class="col-md-6">
+              <div class="screen-preview">
+                <div class="screen-header">
+                  <div class="screen-title">Formulário de Cadastro</div>
+                </div>
+                <div class="screen-body">
+                  <div class="form-layout">
+                    <div class="form-group">
+                      <br-input
+                        id="form-name"
+                        type="text"
+                        label="Nome Completo"
+                        placeholder="Digite seu nome completo"
+                      ></br-input>
+                    </div>
+                    <div class="form-group">
+                      <br-input
+                        id="form-email"
+                        type="email"
+                        label="E-mail"
+                        placeholder="seu.email@exemplo.com"
+                      ></br-input>
+                    </div>
+                    <div class="form-group">
+                      <br-input
+                        id="form-cpf"
+                        type="text"
+                        label="CPF"
+                        placeholder="000.000.000-00"
+                      ></br-input>
+                    </div>
+                    <div class="form-group">
+                      <br-input
+                        id="form-phone"
+                        type="text"
+                        label="Telefone"
+                        placeholder="(00) 00000-0000"
+                      ></br-input>
+                    </div>
+                    <div class="form-group">
+                      <br-input
+                        id="form-address"
+                        type="text"
+                        label="Endereço"
+                        placeholder="Rua, número, complemento"
+                      ></br-input>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-md-6">
+                        <br-input
+                          id="form-city"
+                          type="text"
+                          label="Cidade"
+                          placeholder="Sua cidade"
+                        ></br-input>
+                      </div>
+                      <div class="col-md-6">
+                        <br-select
+                          id="form-state"
+                          density="small"
+                          show-search-icon
+                          label="Estado"
+                          placeholder="Selecione"
+                          [options]="[
+                            { label: 'São Paulo', value: 'SP' },
+                            { label: 'Rio de Janeiro', value: 'RJ' },
+                            { label: 'Minas Gerais', value: 'MG' }
+                          ]"
+                        >
+                        </br-select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <br-input
+                        id="form-zip"
+                        type="text"
+                        label="CEP"
+                        placeholder="00000-000"
+                      ></br-input>
+                    </div>
+                    <div class="form-actions">
+                      <br-button emphasis="secondary">Cancelar</br-button>
+                      <br-button emphasis="primary">Cadastrar</br-button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Formulário de Pesquisa -->
+            <div class="col-md-6">
+              <div class="screen-preview">
+                <div class="screen-header">
+                  <div class="screen-title">Formulário de Pesquisa</div>
+                </div>
+                <div class="screen-body">
+                  <div class="form-layout">
+                    <div class="form-group">
+                      <br-input
+                        id="search-query"
+                        type="text"
+                        label="Termo de Pesquisa"
+                        placeholder="Digite o que você procura"
+                      ></br-input>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label d-block mb-2">Categorias</label>
+                      <div class="d-flex flex-column gap-2">
+                        <br-checkbox
+                          id="cat-1"
+                          name="categorias"
+                          label="Eletrônicos"
+                        ></br-checkbox>
+                        <br-checkbox
+                          id="cat-2"
+                          name="categorias"
+                          label="Roupas"
+                        ></br-checkbox>
+                        <br-checkbox
+                          id="cat-3"
+                          name="categorias"
+                          label="Livros"
+                        ></br-checkbox>
+                        <br-checkbox
+                          id="cat-4"
+                          name="categorias"
+                          label="Esportes"
+                        ></br-checkbox>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Faixa de Preço</label>
+                      <div class="price-range">
+                        <br-input
+                          id="price-min"
+                          type="number"
+                          label="Mín"
+                          placeholder="Mín"
+                        ></br-input>
+                        <span>até</span>
+                        <br-input
+                          id="price-max"
+                          type="number"
+                          label="Máx"
+                          placeholder="Máx"
+                        ></br-input>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label d-block mb-2">Ordenar por</label>
+                      <div class="d-flex flex-column gap-2">
+                        <br-radio
+                          id="sort-1"
+                          name="sort"
+                          value="relevancia"
+                          label="Relevância"
+                        ></br-radio>
+                        <br-radio
+                          id="sort-2"
+                          name="sort"
+                          value="menor-maior"
+                          label="Preço: Menor para Maior"
+                        ></br-radio>
+                        <br-radio
+                          id="sort-3"
+                          name="sort"
+                          value="maior-menor"
+                          label="Preço: Maior para Menor"
+                        ></br-radio>
+                        <br-radio
+                          id="sort-4"
+                          name="sort"
+                          value="avaliacoes"
+                          label="Avaliações"
+                        ></br-radio>
+                      </div>
+                    </div>
+                    <div class="form-actions">
+                      <br-button emphasis="secondary">Limpar</br-button>
+                      <br-button emphasis="primary">Pesquisar</br-button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
